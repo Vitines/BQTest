@@ -1,8 +1,26 @@
+<?php
+
+/**
+ * @author Victor
+ * @copyright 2013
+ */
+
+/*Admin login*/
+
+session_start();
+
+/*Guardamos los datos introducidos por el usuario en la tabla "devoluciones"
+    Yo creo que esto lo haré con jQuery mostrando un mensaje debajo del submit: "Datos enviados correctamente"
+
+*/
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html" />
 	<meta name="author" content="Victor" />
+    <script src="js/jquery-1.10.0.js"></script>
 
 	<title>Pagina de devoluciones BQ</title>
 </head>
