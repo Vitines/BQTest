@@ -8,6 +8,9 @@
 
 session_start();
 
+require_once("../functions.php");
+
+$funciones = new Functions();
 /*Aquí se tienen que poder ver todas las peticiones realizadas por los clientes y aceptarlas o rechazarlas*/
 ?>
 
@@ -23,13 +26,25 @@ session_start();
     
     <div id="content">
          
-        <label for="login"></label>
-        <input type="text" id="login" placeholder="Login"/> <br />
+        <table id="tabla_devoluciones" border=1>
+            <tr>
+                <td>Id Devolucion</td>
+                <td>Nombre Usuario</td>
+                <td>Primer Apellido</td>
+                <td>Segundo Apellido</td>
+                <td>E-Mail</td>
+                <td>Numero de pedido</td>
+                <td>Producto</td>
+                <td>Numero de Serie</td>
+                <td>Motivo de la devolucion</td>
+                <td>Estado</td>                
+                
+            </tr>
+                <?php $funciones->imprimirPeticiones()
+                    /*Imprimir aqui la tabla Productos*/
+                ?>
         
-        <label for="password"></label>
-        <input type="password" id="password" placeholder="Password" /> <br />
-        
-        <input type="button" value="Acceder"/>
+        </table>
     
     </div>
 

@@ -8,6 +8,9 @@
 
 session_start();
 
+require_once("../functions.php");
+
+$funciones = new Functions();
 /*Pagina para introducir nuevos productos*/
 ?>
 
@@ -33,17 +36,23 @@ session_start();
         <input type="button" value="Acceder"/>
 -->
     
-        <table id="tabla_productos" style="border: solid black 1px;">
+        <table id="tabla_productos" border=1>
             <tr>
-                <td>Id Producto</td>
+                <td style="border: solid black 1px;">Id Producto</td>
                 <td>Nombre Producto</td>
                 <td>Descripcion</td>
-                <td>¿Editar?</td>
+                <td></td>
+                <td></td>
                 
-                <?php /*Imprimir aqui la tabla Productos*/?>
+                
             </tr>
+                <?php $funciones->imprimirProductosTable()
+                    /*Imprimir aqui la tabla Productos*/
+                ?>
         
         </table>
+        
+        <a href="admin_index.php">Volver a la pagina anterior</a>
     </div>
 
 </body>
