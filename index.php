@@ -38,7 +38,7 @@ if($_POST){
     $nombreProducto = $funciones->nombrePorId($producto);
     //echo $nombreProducto;
     $funciones->generarPDF($idPedido,$nombre,$apellido1, $apellido2, $email, $num_pedido, $nombreProducto, $num_serie, $motivo);
-    //$funciones->enviarEmail();    
+    $funciones->enviarEmail($nombre, $apellido1, $apellido2, $email, $idPedido);    
 //Comprobar que el numero de serie introducido no tiene ninguna reclamacion sin confirmar. IF POSSIBLE!
 echo "<br>Reclamacion realizada con numero " . $idPedido;
 }

@@ -121,9 +121,46 @@ class Functions{
         
     }
     
-    function enviarEmail(){
-        //Despues de generar el PDF enviamos el email (mirar como anexarlo), supogno que tendre que probarlo desde un hosting publico
+    function enviarEmail($nombre, $apellido1, $apellido2, $email, $idPedido){
+        //Despues de generar el PDF enviamos el email (mirar como anexarlo), supongo que tendre que probarlo desde un hosting publico
+        
+        $emailDestino = $email;
+        
+    	$headers = "MIME-Version: 1.0" . "\r\n";
+    	$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+    
+    	// More headers
+    	$headers .= 'From: BQ <no-reply@bq.com>' . "\r\n";
+        $texto = "<html><body>" . 
+                "<p>Estimado " . $nombre. " " . $apellido1 . " " . $apellido2 . ": </p>" . 
+                "<p>Su reclamacion ha sido recibida con número " . $idPedido . ": </p>" . 
+                "<p>En breve nos pondremos en contacto con usted </p>" . 
+                "<p>No olvide imprimir el PDF anexado para llevar a cabo la reclamación. </p>" . 
+                "<p>Reciba un cordial saludo del equipo de soporte de BQ Readers. </p>"
+                ;
+        mail($emailDestino, $texto, $headers);
+        echo $texto;
     }
+    
+    function envia_contacto(){
+    	
+    	
+    	mail($email_destino,"Formulario de contacto","<html><body>
+    	<p><img src='http://www.quetalento.com/images/cabecera-email-que-talento.jpg'></p>
+    	<p>Nombre: $nombre</p>
+    	<p>Apellidos: $apellidos</p>
+    	<p>Email: $email</p>
+    	<p>Telefono: $telefono</p>
+    	<p>Descripcion: $descripcion</p>
+    	",$headers);
+    	
+    	
+    	echo "<br/>Muchas gracias por enviarnos tu petición.
+    			<br/>En breve nos pondremos en contacto contigo.
+    			<br/><br/><img src='../../images/logo.jpg' alt=''/>";
+}
+    
+    
     
     function comprobarLogin(){
         //Comprobar que el login de usuario administrador es correcto, muy facil
