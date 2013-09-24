@@ -28,15 +28,19 @@ if($_POST){
     $apellido2=$_POST['apellido2'];
     $email=$_POST['email'];
     $num_pedido=$_POST['num_pedido'];
-    $producto=$_POST['producto'];
+    $producto=$_POST['productos'];
     $num_serie=$_POST['num_serie'];
     $motivo=$_POST['motivo'];
 	
     $resul=$funciones->insertarDevolucion($id = '',$nombre,$apellido1, $apellido2, $email, $num_pedido, $producto, $num_serie, $motivo, $estado = 0);
-
+    $idPedido = mysql_insert_id();
     
-//Comprobar que el numero de serie introducido no tiene ninguna reclamacion sin confirmar
-echo "<br>Reclamacion realizada";
+    $nombreProducto = $funciones->nombrePorId($producto);
+    //echo $nombreProducto;
+    $funciones->generarPDF($idPedido,$nombre,$apellido1, $apellido2, $email, $num_pedido, $nombreProducto, $num_serie, $motivo);
+    //$funciones->enviarEmail();    
+//Comprobar que el numero de serie introducido no tiene ninguna reclamacion sin confirmar. IF POSSIBLE!
+echo "<br>Reclamacion realizada con numero " . $idPedido;
 }
 
 
@@ -78,12 +82,12 @@ echo "<br>Reclamacion realizada";
             <input type="text" id="num_pedido" name="num_pedido"/> <br />
             
             <label for="productos">Producto:</label>
-            <select id="productos">
+            <select id="productos" name="productos">
                 <?php 
                     $funciones->imprimirProductosSelect();
                 ?>
                 <!--Este select lo llenaremos dinámicamente desde una tabla que crearemos con todos los diferentes productos
-                    Tendra varios select que con JS funcionaran seun el primer select
+                    Tendra varios select que con JS funcionaran seun el primer select IF POSSIBLE!!
                 -->
                 
             </select> <br />
@@ -92,10 +96,10 @@ echo "<br>Reclamacion realizada";
             <input type="text" id="num_serie" name="num_serie" /> <br />
             
             <label for="motivo">Motivo de la devolucion:</label>
-            <select id="motivo">
-                <option value="0">Cambio</option>
-                <option value="1">Sustitucion</option>
-                <option value="2">Devolucion</option>
+            <select id="motivo" name="motivo">
+                <option value="cambio">Cambio</option>
+                <option value="sustitucion">Sustitucion</option>
+                <option value="devolucion">Devolucion</option>
             </select> <br />
             
             <input type="submit" value="Enviar" id="enviar"/> <br />        
@@ -163,7 +167,7 @@ echo "<br>Reclamacion realizada";
             
             if((num_serie.value=='') || !(num_serie.value.match(validaNumeroSerie))){
 				alert('El campo Numero de serie esta vacio o es incorrecto. Comprueba que cumple con el formato requerido (AA00000000)!');
-				num_pedido.focus();
+				num_serie.focus();
 				return false;
 			}
 
