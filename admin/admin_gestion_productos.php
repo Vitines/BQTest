@@ -20,6 +20,7 @@ $funciones = new Functions();
 <html>
 <head>
     <script src="../js/jquery-1.10.0.js"></script>
+    <script src="../js/jquery.editable.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/general.css" media="screen" />
 </head>
 <body>
@@ -29,16 +30,6 @@ $funciones = new Functions();
         </div>
         
         <div id="content">
-             
-            <!--
-    <label for="login"></label>
-            <input type="text" id="login" placeholder="Login"/> <br />
-            
-            <label for="password"></label>
-            <input type="password" id="password" placeholder="Password" /> <br />
-            
-            <input type="button" value="Acceder"/>
-    -->
         
             <table id="tabla_productos" border=1>
                 <tr>
@@ -48,6 +39,9 @@ $funciones = new Functions();
                     <td></td>
                     <td></td>
                     
+                    <!-- Aquí tengo el código que voy a medio copiar para esto, porque la funcionalidad en si es la misma...
+                    view-source:http://rolrus.net63.net/index.php?nav=juegos&subnav=personajes
+                    -->
                     
                 </tr>
                     <?php $funciones->imprimirProductosTable()

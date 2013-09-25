@@ -43,7 +43,7 @@ class Functions{
         $query = "SELECT * FROM productos";
         $recogeQuery = $this->bd->consulta($query);
         while($fila = $this->bd->extraer()){
-            echo "<tr><td>" . $fila['id_producto'] .  "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['descripcion'] . "</td><td><input type='button' value='Editar' /></td><td><input type='button' value='Borrar' /></td></tr>";
+            echo "<tr><td>" . $fila['id_producto'] .  "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['descripcion'] . "</td><td><input type='button' value='Editar' class='editar' /></td><td><input type='button' value='Borrar' class='borrar'/></td></tr>";
             }
         
     }
@@ -66,7 +66,7 @@ class Functions{
                     break;
             }
             
-            echo "<tr><td>" . $fila['id_devolucion'] .  "</td><td>" . $fila['nombre'] . "</td><td>" . $fila['apellido1'] . "</td><td>" . $fila['apellido2'] . "</td><td>" . $fila['email'] . "</td><td>" . $fila['numero_pedido'] . "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['numero_serie'] . "</td><td>" . $fila['motivo'] . "</td><td>" . $fila['estado'] . "</td><td><input type='button' value='Aceptar' /></td><td><input type='button' value='Denegar' /></td></tr>";
+            echo "<tr><td>" . $fila['id_devolucion'] .  "</td><td>" . $fila['nombre'] . "</td><td>" . $fila['apellido1'] . "</td><td>" . $fila['apellido2'] . "</td><td>" . $fila['email'] . "</td><td>" . $fila['numero_pedido'] . "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['numero_serie'] . "</td><td>" . $fila['motivo'] . "</td><td>" . $fila['estado'] . "</td><td><input type='button' class='aceptar' value='Aceptar' /></td><td><input type='button' class='denegar' value='Denegar' /></td></tr>";
             }
         
     }
@@ -85,6 +85,11 @@ class Functions{
         $filas = $this->bd->extraer();
         return $filas['nombre_producto'];
         
+    }
+    
+    function cambioEstado($id, $estado){
+        $query = "UPDATE devoluciones SET estado = '" .$estado . "' WHERE id_devolucion = '" . $id . "'";
+        $recogeQuery = $this->bd->consulta($query);
     }
     
     function generarPDF($idPedido,$nombre,$apellido1, $apellido2, $email, $num_pedido, $producto, $num_serie, $motivo){

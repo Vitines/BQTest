@@ -54,6 +54,50 @@ $funciones = new Functions();
         
         </div>
     </div>
+    <script type="text/javascript">
+    
+        $(function(){
+           $('.aceptar').click(function(event){
+                var id_devolucion = $(this).parent().parent().children().html();
+                var estado_devolucion = $(this).parent().prev();
+                //alert(estado_devolucion);
+                
+                $.ajax({ 
+                    url: "../ajaxAcciones.php",
+                    data: { 
+                        accion: "aceptar",
+                        id_devolucion: id_devolucion
+                    },
+                    type: 'post',
+                    success: function(data){
+                        estado_devolucion.html(data);
+                    }
+                    //success: //Con this y esas cosas estilo actualizarCarrito
+                })
+            
+           });
+           
+           $('.denegar').click(function(event){
+                var id_devolucion = $(this).parent().parent().children().html();
+                var estado_devolucion = $(this).parent().prev().prev();
+                $.ajax({ 
+                    url: "../ajaxAcciones.php",
+                    data: { 
+                        accion: "denegar",
+                        id_devolucion: id_devolucion
+                    },
+                    type: 'post',
+                    success: function(data){
+                        estado_devolucion.html(data);
+                    }
+                    //success: //Con this y esas cosas estilo actualizarCarrito
+                })
+            
+           });
+            
+        });
+    
+    </script>
 </body>
 
 </html>
