@@ -119,6 +119,7 @@ class Functions{
         //Pasamos los parametros al generar el tema
         $pdf->Output($nombreFichero, 'F');
         
+        return $nombreFichero;
     }
     
     function enviarEmail($nombre, $apellido1, $apellido2, $email, $idPedido){
@@ -128,36 +129,75 @@ class Functions{
         
     	$headers = "MIME-Version: 1.0" . "\r\n";
     	$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-    
-    	// More headers
     	$headers .= 'From: BQ <no-reply@bq.com>' . "\r\n";
+        
         $texto = "<html><body>" . 
                 "<p>Estimado " . $nombre. " " . $apellido1 . " " . $apellido2 . ": </p>" . 
                 "<p>Su reclamacion ha sido recibida con número " . $idPedido . ": </p>" . 
                 "<p>En breve nos pondremos en contacto con usted </p>" . 
                 "<p>No olvide imprimir el PDF anexado para llevar a cabo la reclamación. </p>" . 
-                "<p>Reciba un cordial saludo del equipo de soporte de BQ Readers. </p>"
+                "<p>Reciba un cordial saludo del equipo de soporte de BQ Readers. </p>" . 
+                "</body></html>"
                 ;
         mail($emailDestino, $texto, $headers);
-        echo $texto;
+        //echo $texto;
     }
     
-    function envia_contacto(){
-    	
-    	
-    	mail($email_destino,"Formulario de contacto","<html><body>
-    	<p><img src='http://www.quetalento.com/images/cabecera-email-que-talento.jpg'></p>
-    	<p>Nombre: $nombre</p>
-    	<p>Apellidos: $apellidos</p>
-    	<p>Email: $email</p>
-    	<p>Telefono: $telefono</p>
-    	<p>Descripcion: $descripcion</p>
-    	",$headers);
-    	
-    	
-    	echo "<br/>Muchas gracias por enviarnos tu petición.
-    			<br/>En breve nos pondremos en contacto contigo.
-    			<br/><br/><img src='../../images/logo.jpg' alt=''/>";
+    function enviaEmail($nombre, $apellido1, $apellido2, $email, $idPedido, $nombreArchivo){
+    
+        require_once('PHPMailer/class.phpmailer.php');
+        //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
+        
+        $mail             = new PHPMailer();
+        
+        //$body             = file_get_contents('contents.html');
+        //$body             = eregi_replace("[\]",'',$body);
+        
+        $mail->IsSMTP(); // telling the class to use SMTP
+        //$mail->Host       = "mail.yourdomain.com"; // SMTP server
+        //$mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+                                                   // 1 = errors and messages
+                                                   // 2 = messages only
+        $mail->SMTPAuth   = true;                  // enable SMTP authentication
+        $mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+        $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+        $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+        $mail->Username   = "vitinesnes@gmail.com";  // GMAIL username
+        $mail->Password   = "vitines81?";            // GMAIL password
+        
+        $mail->SetFrom('soporte@bqreaders.com', 'BQ');
+        
+        $mail->AddReplyTo('soporte@bqreaders.com', 'BQ');
+        
+        $mail->Subject    = "Reclamacion al servicio tecnico de BQ recibida correctamente";
+        
+        $mail->AltBody    = "Para ver correctamente este mensaje, por favor, utilize un cliente de correo compatible con HTML!"; // optional, comment out and test
+        
+        $texto = "<html><body>" . 
+                    "<p>Estimado " . $nombre. " " . $apellido1 . " " . $apellido2 . ": </p>" . 
+                    "<p>Su reclamacion ha sido recibida con número " . $idPedido . ": </p>" . 
+                    "<p>En breve nos pondremos en contacto con usted </p>" . 
+                    "<p>No olvide imprimir el PDF anexado para llevar a cabo la reclamación. </p>" . 
+                    "<p>Reciba un cordial saludo del equipo de soporte de BQ Readers. </p>" . 
+                    "</body></html>"
+                    ;
+                    
+        $mail->MsgHTML($texto);
+        
+        $address = $email;
+        $mail->AddAddress($address, ($nombre . " " . $apellido1 . " " . $apellido2));
+        
+        $mail->AddAttachment($nombreArchivo);      // attachment
+        //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
+        //echo $nombreArchivo;
+        if(!$mail->Send()) {
+          echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+          echo "Se le ha enviado un email a su direccion de correo con los pasos a seguir.";
+        }
+    
+    
+
 }
     
     

@@ -10,7 +10,7 @@
 session_start();
 
 require_once("functions.php");
-
+//require_once("envioMail.php");
 $funciones = new Functions();
 /*Guardamos los datos introducidos por el usuario en la tabla "devoluciones"
     Yo creo que esto lo haré con jQuery mostrando un mensaje debajo del submit: "Datos enviados correctamente"
@@ -18,7 +18,8 @@ $funciones = new Functions();
 */
 
 
-
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 
 
 
@@ -37,8 +38,12 @@ if($_POST){
     
     $nombreProducto = $funciones->nombrePorId($producto);
     //echo $nombreProducto;
-    $funciones->generarPDF($idPedido,$nombre,$apellido1, $apellido2, $email, $num_pedido, $nombreProducto, $num_serie, $motivo);
-    $funciones->enviarEmail($nombre, $apellido1, $apellido2, $email, $idPedido);    
+    $nombreFichero = $funciones->generarPDF($idPedido,$nombre,$apellido1, $apellido2, $email, $num_pedido, $nombreProducto, $num_serie, $motivo);
+    //$funciones->enviarEmail($nombre, $apellido1, $apellido2, $email, $idPedido);
+    
+    $funciones->enviaEmail($nombre, $apellido1, $apellido2, $email, $idPedido, $nombreFichero);
+    
+    
 //Comprobar que el numero de serie introducido no tiene ninguna reclamacion sin confirmar. IF POSSIBLE!
 echo "<br>Reclamacion realizada con numero " . $idPedido;
 }
@@ -106,7 +111,7 @@ echo "<br>Reclamacion realizada con numero " . $idPedido;
         </form>
     </div>
     
-    <div id="footer"></div>
+    <div id="footer"><?php //echo $nombreFichero; ?></div>
 </div>
 
 <script type="text/javascript">
