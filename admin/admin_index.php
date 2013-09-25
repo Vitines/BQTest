@@ -8,6 +8,8 @@
 
 session_start();
 
+if(!isset($_SESSION['admin']) || $_SESSION['admin'] != 'si')
+    header('Location: admin_login.php');
 require_once("../functions.php");
 
 $funciones = new Functions();
@@ -20,35 +22,38 @@ $funciones = new Functions();
     <link rel="stylesheet" type="text/css" href="../css/general.css" media="screen" />
 </head>
 <body>
-
-    <div id="header">
-        <h1>Listado Peticiones Zona Admin</h1>
-    </div>
-    
-    <div id="content">
-         
-        <table id="tabla_devoluciones" border=1>
-            <tr>
-                <td>Id Devolucion</td>
-                <td>Nombre Usuario</td>
-                <td>Primer Apellido</td>
-                <td>Segundo Apellido</td>
-                <td>E-Mail</td>
-                <td>Numero de pedido</td>
-                <td>Producto</td>
-                <td>Numero de Serie</td>
-                <td>Motivo de la devolucion</td>
-                <td>Estado</td>                
-                
-            </tr>
-                <?php $funciones->imprimirPeticiones()
-                    /*Imprimir aqui la tabla Productos*/
-                ?>
+    <div id="wrapper">
+        <div id="header">
+            <h1>Listado Peticiones Zona Admin</h1>
+            <div id="enlace_productos">
+            <a href="admin_gestion_productos.php">Ir a gestión de productos</a>
+        </div>
+        </div>
         
-        </table>
-    
+        <div id="content_admin">
+             
+            <table id="tabla_devoluciones" border=1>
+                <tr>
+                    <td>Id Devolucion</td>
+                    <td>Nombre Usuario</td>
+                    <td>Primer Apellido</td>
+                    <td>Segundo Apellido</td>
+                    <td>E-Mail</td>
+                    <td>Numero de pedido</td>
+                    <td>Producto</td>
+                    <td>Numero de Serie</td>
+                    <td>Motivo de la devolucion</td>
+                    <td>Estado</td>                
+                    
+                </tr>
+                    <?php $funciones->imprimirPeticiones()
+                        /*Imprimir aqui la tabla Productos*/
+                    ?>
+            
+            </table>
+        
+        </div>
     </div>
-
 </body>
 
 </html>

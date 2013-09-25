@@ -53,7 +53,7 @@ if($_POST){
 <div id="wrapper">
     <div id="header"><h1>Formulario de devoluciones productos BQ</h1></div>
     
-    <div id="content" style="">
+    <div id="content">
         <div id="divFormulario">
             <form id="formulario" action="" method="post">
             
@@ -82,9 +82,9 @@ if($_POST){
                 
                 <label for="motivo">Motivo de la devolucion:</label>
                 <select id="motivo" name="motivo">
-                    <option value="cambio">Cambio</option>
-                    <option value="sustitucion">Sustitucion</option>
-                    <option value="devolucion">Devolucion</option>
+                    <option value="Cambio">Cambio</option>
+                    <option value="Sustitucion">Sustitucion</option>
+                    <option value="Devolucion">Devolucion</option>
                 </select> <br /><br />
                 
                 <input type="submit" value="Enviar" id="enviar"/> <br /><br />  
@@ -99,7 +99,7 @@ if($_POST){
     </div>
 </div>
 
-<script type="text/javascript" src="comprobarDatosFormulario.js"></script>
+<script type="text/javascript" src="js/comprobarDatosFormulario.js"></script>
 
 </body>
 </html>

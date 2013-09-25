@@ -29,11 +29,9 @@ class Functions{
     }
     
     function imprimirProductosSelect(){
+        //Para el index de usuarios
         $query = "SELECT * FROM productos";
-        $recogeQuery = $this->bd->consulta($query);
-        //echo $query;
-        //$this->bd
-        
+        $recogeQuery = $this->bd->consulta($query);    
         while($fila = $this->bd->extraer()){
             echo "<option value=" . $fila['id_producto'] .  ">" . $fila['nombre_producto'] . "</option>";
             }
@@ -41,10 +39,9 @@ class Functions{
     }
     
     function imprimirProductosTable(){
+        //Para la pagina de gestion de productos
         $query = "SELECT * FROM productos";
         $recogeQuery = $this->bd->consulta($query);
-
-        
         while($fila = $this->bd->extraer()){
             echo "<tr><td>" . $fila['id_producto'] .  "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['descripcion'] . "</td><td><input type='button' value='Editar' /></td><td><input type='button' value='Borrar' /></td></tr>";
             }
@@ -52,11 +49,24 @@ class Functions{
     }
     
     function imprimirPeticiones(){
-        $query = "SELECT * FROM devoluciones";
+        
+        $query = "SELECT * FROM devoluciones d INNER JOIN productos p ON d.producto = p.id_producto";
         $recogeQuery = $this->bd->consulta($query);
-
+        
         while($fila = $this->bd->extraer()){
-            echo "<tr><td>" . $fila['id_devolucion'] .  "</td><td>" . $fila['nombre'] . "</td><td>" . $fila['apellido1'] . "</td><td>" . $fila['apellido2'] . "</td><td>" . $fila['email'] . "</td><td>" . $fila['numero_pedido'] . "</td><td>" . $fila['producto'] . "</td><td>" . $fila['numero_serie'] . "</td><td>" . $fila['motivo'] . "</td><td>" . $fila['estado'] . "</td><td><input type='button' value='Aceptar' /></td><td><input type='button' value='Denegar' /></td></tr>";
+            switch($fila['estado']){
+                case 0:
+                    $fila['estado'] = 'Pendiente';
+                    break;
+                case 1:
+                    $fila['estado'] = 'Aceptado';
+                    break;
+                case 2:
+                    $fila['estado'] = 'Denegado';
+                    break;
+            }
+            
+            echo "<tr><td>" . $fila['id_devolucion'] .  "</td><td>" . $fila['nombre'] . "</td><td>" . $fila['apellido1'] . "</td><td>" . $fila['apellido2'] . "</td><td>" . $fila['email'] . "</td><td>" . $fila['numero_pedido'] . "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['numero_serie'] . "</td><td>" . $fila['motivo'] . "</td><td>" . $fila['estado'] . "</td><td><input type='button' value='Aceptar' /></td><td><input type='button' value='Denegar' /></td></tr>";
             }
         
     }
@@ -72,8 +82,8 @@ class Functions{
     function nombrePorId($id){
         $query = "SELECT nombre_producto FROM productos WHERE id_producto = " . $id;
         $recogeQuery = $this->bd->consulta($query);
-        $fila = $this->bd->extraer();
-        return $fila['nombre_producto'];
+        $filas = $this->bd->extraer();
+        return $filas['nombre_producto'];
         
     }
     
@@ -182,8 +192,15 @@ class Functions{
     
     
     
-    function comprobarLogin(){
+    function comprobarLogin($usuario, $password){
         //Comprobar que el login de usuario administrador es correcto, muy facil
+        echo "Dime algo!";
+        $query = "SELECT * FROM admin WHERE user = '$usuario' AND password = '$password'";
+        echo $query;
+        $this->bd->consulta($query);
+        if($fila = $this->bd->extraer())
+            return true;
     }
+    
 }
 ?>
