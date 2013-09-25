@@ -17,6 +17,7 @@ $funciones = new Functions();
 <html>
 <head>
     <script src="../js/jquery-1.10.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/general.css" media="screen" />
 </head>
 <body>
 

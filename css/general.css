@@ -1,0 +1,15 @@
+#wrapper{
+    text-align: center; 
+    background: gainsboro; 
+    margin: auto 300px;
+}
+
+#content{
+    width: 300px; 
+    text-align: center; 
+    margin: auto auto; 
+}
+
+#divFormulario{
+    text-align: right;
+}
