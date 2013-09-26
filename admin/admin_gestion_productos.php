@@ -20,7 +20,6 @@ $funciones = new Functions();
 <html>
 <head>
     <script src="../js/jquery-1.10.0.js"></script>
-    <script src="../js/jquery.editable.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/general.css" media="screen" />
 </head>
 <body>
@@ -29,7 +28,7 @@ $funciones = new Functions();
             <h1>Gestion Productos Zona Admin</h1>
         </div>
         
-        <div id="content">
+        <div id="content_admin_productos">
         
             <table id="tabla_productos" border=1>
                 <tr>
@@ -50,9 +49,83 @@ $funciones = new Functions();
             
             </table>
             
-            <a href="admin_index.php">Volver a la pagina anterior</a>
+            <br /><br />
+            <input type="button" id="anadirProducto" value="Añadir un producto" /> <br /><br />
+            <a href="admin_index.php">Volver a la pagina anterior</a> <br /><br />
+            
         </div>
     </div>
+    <script type="text/javascript">
+        
+        $(function(){
+            var contador=0;
+            $('.confirmar').click(function(){
+                
+                //Al hacer click en cualquier boton Cofirmar edicion se guardan los cambios en la BBDD, tabla Productos
+                
+                var nombre = $(this).closest('tr').find('.nombre_producto').val();
+                var descripcion = $(this).closest('tr').find('.descripcion').val();
+                var id_producto = $(this).parent().parent().children().html();
+
+                $.ajax({ 
+                    url: "../ajaxAcciones.php",
+                    data: { 
+                        accion: "editar",
+                        id_producto: id_producto,
+                        nombre_producto: nombre,
+                        descripcion: descripcion
+                        
+                    },
+                    type: 'post',
+                    success: function(data){
+                        alert(data);
+                    }
+
+                })
+                
+             });
+            
+            $('.borrar').click(function(){
+                
+                //Al hacer click en cualquier boton Borrar se borra el producto de la correspondiente tabla
+                var id_producto = $(this).parent().parent().children().html();
+                $.ajax({ 
+                    url: "../ajaxAcciones.php",
+                    data: { 
+                        accion: "borrar",
+                        id_producto: id_producto,
+                    },
+                    type: 'post',
+                    success: function(){
+                        location.reload();
+                    }
+
+                })
+            });
+            
+            $('#anadirProducto').click(function(){
+                
+                //Al hacer click en Anadir un producto, se anade a la tabla Productos y se muestra en la pagina
+                var nombre_producto = prompt("Nombre del producto? (maximo 20 caracteres)");
+                var descripcion = prompt("Descripcion del producto? (maximo 100 caracteres)");
+                
+                $.ajax({ 
+                    url: "../ajaxAcciones.php",
+                    data: { 
+                        accion: "anadir",
+                        nombre_producto: nombre_producto,
+                        descripcion: descripcion
+                    },
+                    type: 'post',
+                    success: function(){
+                        location.reload();
+                    }
+
+                })
+            })
+            
+        })
+    </script>
 </body>
 
 </html>

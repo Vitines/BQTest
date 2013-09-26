@@ -3,7 +3,10 @@
 /**
  * @author Victor
  * @copyright 2013
+ * 
  */
+ 
+//Este es el index de la zona admin, donde se pueden aceptar o denegar las peticiones de devolucion enviadas por los clientes
 
 
 session_start();
@@ -11,9 +14,8 @@ session_start();
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] != 'si')
     header('Location: admin_login.php');
 require_once("../functions.php");
-
 $funciones = new Functions();
-/*Aquí se tienen que poder ver todas las peticiones realizadas por los clientes y aceptarlas o rechazarlas*/
+
 ?>
 
 <html>
@@ -47,7 +49,6 @@ $funciones = new Functions();
                     
                 </tr>
                     <?php $funciones->imprimirPeticiones()
-                        /*Imprimir aqui la tabla Productos*/
                     ?>
             
             </table>
@@ -58,9 +59,10 @@ $funciones = new Functions();
     
         $(function(){
            $('.aceptar').click(function(event){
+                
+                //Al hacer click en cualquier boton Aceptar la peticion pasa al estado Aceptada
                 var id_devolucion = $(this).parent().parent().children().html();
                 var estado_devolucion = $(this).parent().prev();
-                //alert(estado_devolucion);
                 
                 $.ajax({ 
                     url: "../ajaxAcciones.php",
@@ -72,12 +74,13 @@ $funciones = new Functions();
                     success: function(data){
                         estado_devolucion.html(data);
                     }
-                    //success: //Con this y esas cosas estilo actualizarCarrito
+
                 })
             
            });
            
            $('.denegar').click(function(event){
+                //Al hacer click en cualquier boton Denegar la peticion pasa al estado Denegada
                 var id_devolucion = $(this).parent().parent().children().html();
                 var estado_devolucion = $(this).parent().prev().prev();
                 $.ajax({ 
@@ -90,7 +93,7 @@ $funciones = new Functions();
                     success: function(data){
                         estado_devolucion.html(data);
                     }
-                    //success: //Con this y esas cosas estilo actualizarCarrito
+
                 })
             
            });

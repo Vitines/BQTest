@@ -43,7 +43,7 @@ class Functions{
         $query = "SELECT * FROM productos";
         $recogeQuery = $this->bd->consulta($query);
         while($fila = $this->bd->extraer()){
-            echo "<tr><td>" . $fila['id_producto'] .  "</td><td>" . $fila['nombre_producto'] . "</td><td>" . $fila['descripcion'] . "</td><td><input type='button' value='Editar' class='editar' /></td><td><input type='button' value='Borrar' class='borrar'/></td></tr>";
+            echo "<tr><td class='id_producto'>" . $fila['id_producto'] .  "</td><td><input type='text' class='nombre_producto' value='" . $fila['nombre_producto'] . "'/></td><td><input type='text' class='descripcion' value='" . $fila['descripcion'] . "'/></td><td><input type='button' value='Confirmar edicion' class='confirmar' /></td><td><input type='button' value='Borrar' class='borrar'/></td></tr>";
             }
         
     }
@@ -89,6 +89,21 @@ class Functions{
     
     function cambioEstado($id, $estado){
         $query = "UPDATE devoluciones SET estado = '" .$estado . "' WHERE id_devolucion = '" . $id . "'";
+        $recogeQuery = $this->bd->consulta($query);
+    }
+    
+    function editarProducto($id, $nombre, $descripcion){
+        $query = "UPDATE productos SET nombre_producto = '" . $nombre . "', descripcion = '" . $descripcion . "' WHERE id_producto = '" . $id . "'";
+        $recogeQuery = $this->bd->consulta($query);
+    }
+    
+    function anadirProducto($nombreProducto, $descripcion){
+        $query = "INSERT INTO productos (nombre_producto, descripcion) values ('$nombreProducto', '$descripcion')";
+        $recogeQuery = $this->bd->consulta($query);
+    }
+    
+    function borrarProducto($id){
+        $query = "DELETE FROM productos WHERE id_producto = '" . $id . "'";
         $recogeQuery = $this->bd->consulta($query);
     }
     
