@@ -1,7 +1,0 @@
-1. Crear cuenta GitHub + Primer commit. HECHO!
-2. Índice y esquema documentación
-3. Creación BBDD			HECHO!
-4. Diseño de las páginas (HTML/CSS)
-5. Programación Servidor PHP
-6. Interacción cliente, servidor (jQuery, Ajax)
-7. Retoques código, solicitud de prueba
