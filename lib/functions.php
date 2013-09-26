@@ -211,9 +211,7 @@ class Functions{
     
     function comprobarLogin($usuario, $password){
         //Comprobar que el login de usuario administrador es correcto, muy facil
-        echo "Dime algo!";
         $query = "SELECT * FROM admin WHERE user = '$usuario' AND password = '$password'";
-        echo $query;
         $this->bd->consulta($query);
         if($fila = $this->bd->extraer())
             return true;
