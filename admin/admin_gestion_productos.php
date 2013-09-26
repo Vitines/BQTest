@@ -11,7 +11,7 @@ session_start();
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] != 'si')
     header('Location: admin_login.php');
     
-require_once("../functions.php");
+require_once("../lib/functions.php");
 
 $funciones = new Functions();
 /*Pagina para introducir nuevos productos*/
@@ -68,7 +68,7 @@ $funciones = new Functions();
                 var id_producto = $(this).parent().parent().children().html();
 
                 $.ajax({ 
-                    url: "../ajaxAcciones.php",
+                    url: "../lib/ajaxAcciones.php",
                     data: { 
                         accion: "editar",
                         id_producto: id_producto,
@@ -90,7 +90,7 @@ $funciones = new Functions();
                 //Al hacer click en cualquier boton Borrar se borra el producto de la correspondiente tabla
                 var id_producto = $(this).parent().parent().children().html();
                 $.ajax({ 
-                    url: "../ajaxAcciones.php",
+                    url: "../lib/ajaxAcciones.php",
                     data: { 
                         accion: "borrar",
                         id_producto: id_producto,
@@ -110,7 +110,7 @@ $funciones = new Functions();
                 var descripcion = prompt("Descripcion del producto? (maximo 100 caracteres)");
                 
                 $.ajax({ 
-                    url: "../ajaxAcciones.php",
+                    url: "../lib/ajaxAcciones.php",
                     data: { 
                         accion: "anadir",
                         nombre_producto: nombre_producto,

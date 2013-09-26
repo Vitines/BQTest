@@ -11,6 +11,7 @@ require_once("conectarBBDD.php");
 
 class Functions{
     
+    
     private $servidor = "localhost";
     private $usuario = "root";
     private $password = "";
@@ -114,7 +115,7 @@ class Functions{
         $nombreFichero = 'Archivos/Devol' . $idPedido . '.pdf';
         $tituloArchivo = 'Reclamacion numero: ' . $idPedido;
         //Incluimos la libreria e instanciamos un objeto de esta 'estandar': formato alargado y medido en mm y tamaño A4
-        require_once("FPDF/fpdf.php");
+        require_once("../FPDF/fpdf.php");
         $pdf = new FPDF();
         //Anadimos la primera pagina
         $pdf->AddPage();
@@ -156,12 +157,9 @@ class Functions{
     function enviaEmail($nombre, $apellido1, $apellido2, $email, $idPedido, $nombreArchivo){
     
         require_once('PHPMailer/class.phpmailer.php');
-        //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
+
         
         $mail             = new PHPMailer();
-        
-        //$body             = file_get_contents('contents.html');
-        //$body             = eregi_replace("[\]",'',$body);
         
         $mail->IsSMTP(); // telling the class to use SMTP
         //$mail->Host       = "mail.yourdomain.com"; // SMTP server
@@ -198,8 +196,7 @@ class Functions{
         $mail->AddAddress($address, ($nombre . " " . $apellido1 . " " . $apellido2));
         
         $mail->AddAttachment($nombreArchivo);      // attachment
-        //$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
-        //echo $nombreArchivo;
+
         if(!$mail->Send()) {
           echo "Mailer Error: " . $mail->ErrorInfo;
         } else {

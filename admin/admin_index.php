@@ -13,7 +13,7 @@ session_start();
 
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] != 'si')
     header('Location: admin_login.php');
-require_once("../functions.php");
+require_once("../lib/functions.php");
 $funciones = new Functions();
 
 ?>
@@ -65,7 +65,7 @@ $funciones = new Functions();
                 var estado_devolucion = $(this).parent().prev();
                 
                 $.ajax({ 
-                    url: "../ajaxAcciones.php",
+                    url: "../lib/ajaxAcciones.php",
                     data: { 
                         accion: "aceptar",
                         id_devolucion: id_devolucion
@@ -84,7 +84,7 @@ $funciones = new Functions();
                 var id_devolucion = $(this).parent().parent().children().html();
                 var estado_devolucion = $(this).parent().prev().prev();
                 $.ajax({ 
-                    url: "../ajaxAcciones.php",
+                    url: "../lib/ajaxAcciones.php",
                     data: { 
                         accion: "denegar",
                         id_devolucion: id_devolucion

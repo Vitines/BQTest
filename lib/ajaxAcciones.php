@@ -10,7 +10,6 @@ $funciones = new Functions();
 if(isset($_POST['accion']) && !empty($_POST['accion'])) {
     
     $accion = $_POST['accion'];
-    //Me falta por conseguir este dato, VOY A CENAR!!
     
     switch($accion){
         

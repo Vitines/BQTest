@@ -9,7 +9,7 @@
 
 session_start();
 
-require_once('../functions.php');
+require_once('../lib/functions.php');
 $funciones = new Functions();
 
 if((isset($_SESSION['admin'])) && ($_SESSION['admin'] == 'si'))

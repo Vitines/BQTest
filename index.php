@@ -7,7 +7,7 @@
 
 session_start();
 
-require_once("functions.php");
+require_once("lib/functions.php");
 $funciones = new Functions();
 
 //error_reporting(E_ALL);
