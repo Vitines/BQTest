@@ -114,8 +114,8 @@ class Functions{
         
         $nombreFichero = 'Archivos/Devol' . $idPedido . '.pdf';
         $tituloArchivo = 'Reclamacion numero: ' . $idPedido;
-        //Incluimos la libreria e instanciamos un objeto de esta 'estandar': formato alargado y medido en mm y tamaño A4
-        require_once("../FPDF/fpdf.php");
+        //Incluimos la libreria e instanciamos un objeto de esta 'estandar': formato alargado y medido en mm y tamaï¿½o A4
+        require_once("FPDF/fpdf.php");
         $pdf = new FPDF();
         //Anadimos la primera pagina
         $pdf->AddPage();
@@ -183,9 +183,9 @@ class Functions{
         
         $texto = "<html><body>" . 
                     "<p>Estimado " . $nombre. " " . $apellido1 . " " . $apellido2 . ": </p>" . 
-                    "<p>Su reclamacion ha sido recibida con número " . $idPedido . ": </p>" . 
+                    "<p>Su reclamacion ha sido recibida con nï¿½mero " . $idPedido . ": </p>" . 
                     "<p>En breve nos pondremos en contacto con usted </p>" . 
-                    "<p>No olvide imprimir el PDF anexado para llevar a cabo la reclamación. </p>" . 
+                    "<p>No olvide imprimir el PDF anexado para llevar a cabo la reclamaciï¿½n. </p>" . 
                     "<p>Reciba un cordial saludo del equipo de soporte de BQ Readers. </p>" . 
                     "</body></html>"
                     ;
