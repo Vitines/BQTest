@@ -17,8 +17,8 @@ require_once("../lib/functions.php");
 $funciones = new Functions();
 
 ?>
-
-<html>
+<!doctype html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <script src="../js/jquery-1.10.0.js"></script>
@@ -27,7 +27,7 @@ $funciones = new Functions();
     <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" media="screen" />
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="container">
         <div id="header">
             <h1>Listado Peticiones Zona Admin</h1>
             <div id="enlace_productos">

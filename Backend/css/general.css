@@ -1,7 +1,11 @@
 #wrapper{
     text-align: center; 
     background: gainsboro; 
-    margin: auto 100px;
+    /*margin: auto 100px;*/
+}
+
+#header{
+    min-height: 50px;
 }
 
 #content{
