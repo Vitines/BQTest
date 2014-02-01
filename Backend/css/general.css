@@ -27,3 +27,5 @@
     text-align: center;
     margin:  auto auto;
 }
+
+select{min-width: 140px;}
