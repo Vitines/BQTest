@@ -20,15 +20,18 @@ $funciones = new Functions();
 
 <html>
 <head>
+    <meta charset="UTF-8">
     <script src="../js/jquery-1.10.0.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/general.css" media="screen" />
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="css/general.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" media="screen" />
 </head>
 <body>
     <div id="wrapper">
         <div id="header">
             <h1>Listado Peticiones Zona Admin</h1>
             <div id="enlace_productos">
-            <a href="admin_gestion_productos.php">Ir a gestión de productos</a>
+            <a href="admin_gestion_productos.php">Ir a gestiÃ³n de productos</a>
         </div>
         </div>
         

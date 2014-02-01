@@ -11,10 +11,14 @@ require_once("lib/indexController.php");?>
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html" />
+    <meta charset="UTF-8">
 	<meta name="author" content="Victor" />
     <script src="js/jquery-1.10.0.js"></script>
 	<title>Pagina de devoluciones BQ</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="css/general.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="screen" />
+
 </head>
 
 <body>
